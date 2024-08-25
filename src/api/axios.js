@@ -5,7 +5,7 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 
 
-const baseUrl=`${process.env.SERVER_URL}`
+const baseUrl=`${process.env.REACT_APP_SERVER_URL}`
 
 
 export default axios.create({
