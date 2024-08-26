@@ -54,7 +54,7 @@ const Login = () => {
                     }
 
                 }).catch((err) => {
-                    alert("error", "Error loging In")
+                    alert("Error loging In")
                     console.log(err)
                 }
                 )

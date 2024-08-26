@@ -49,7 +49,7 @@ const Sidebar = ({ open, toggle }) => {
 
 
     return (
-        <div className='flex w-full flex-col z-10 ' style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }}>
+        <div className={`w-full flex-col z-10 ${open?'flex':'hidden'} `} style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }}>
             <div className='flex h-[70px] px-3 py-2'>
                 <div className='w-full flex gap-1 items-center justify-start'>
                     <span className='font-extrabold h-[40px] w-[40px] flex justify-center items-center rounded-lg text-xl bg-[--color-primary]'>
@@ -57,7 +57,7 @@ const Sidebar = ({ open, toggle }) => {
                     </span>
                     {
                         open &&
-                        <h1 className='font-bold'>
+                        <h1 className='font-bold hidden md:block'>
 
                             BookStore
                         </h1>
@@ -74,7 +74,7 @@ const Sidebar = ({ open, toggle }) => {
                                 {item.icon}
                                 {
                                     open &&
-                                    <p className='text-lg'>
+                                    <p className='text-lg hidden md:block'>
                                         {item.title}
                                     </p>
                                 }
