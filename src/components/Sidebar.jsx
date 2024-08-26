@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link, useLocation } from 'react-router-dom';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import GroupIcon from '@mui/icons-material/Group';
 
 const data = [
     {
@@ -10,22 +13,22 @@ const data = [
     },
     {
         title: "Books",
-        icon: <DashboardIcon className='w-[24px] h-[24px]' />,
+        icon: <LibraryBooksIcon className='w-[24px] h-[24px]' />,
         link: "books",
     },
     {
         title: "Issue Book",
-        icon: <DashboardIcon className='w-[24px] h-[24px]' />,
+        icon: <AutoStoriesIcon className='w-[24px] h-[24px]' />,
         link: "issue-books",
     },
     {
         title: "Return Books",
-        icon: <DashboardIcon className='w-[24px] h-[24px]' />,
+        icon: <AutoStoriesIcon className='w-[24px] h-[24px]' />,
         link: "return-books",
     },
     {
         title: "Users",
-        icon: <DashboardIcon className='w-[24px] h-[24px]' />,
+        icon: <GroupIcon className='w-[24px] h-[24px]' />,
         link: "users",
     },
 
