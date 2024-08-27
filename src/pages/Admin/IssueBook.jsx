@@ -123,7 +123,19 @@ const IssueBook = () => {
       navigate(-1)
      }
     } catch (error) {
-      alert("Error Issuing Book")
+      if(error.response.status===401)
+      {
+        alert("Book is Already issued to User")
+      }
+      else if(error.response.status===400)
+      {
+        alert("No Available Books to Issue")
+      }
+      else
+      {
+
+        alert("Error Issuing Book")
+      }
     }
     closeBackdrop();
   }
@@ -133,14 +145,14 @@ const IssueBook = () => {
     <>
       <BackdropComponent />
       <PageContainer>
-        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap min-w-[600px]'>
+        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap min-w-[600px]  '>
           <h1 className='text-4xl font-semibold'>
             Issue Book
           </h1>
 
           <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white'>Add Book</Link>
         </div>
-        <div className='w-full rounded-lg p-3 overflow-auto pb-2 flex flex-col gap-3' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
+        <div className='w-full rounded-lg p-3 pb-2 flex flex-col gap-3' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
             
          
@@ -156,12 +168,12 @@ const IssueBook = () => {
           </div>
           </div>
           <div className='w-full flex gap-1 flex-col '>
-            <label htmlFor=""> Expected Return Date</label>
+            <label htmlFor="">Remark</label>
             <textarea  value={formData.remark} onChange={handleFormData} name='remark' className='h-[100px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
            
           </div>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 h-[calc(100% - 80px)]'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[calc(100%-400px)]'>
           <div className='w-full rounded-lg p-3 h-full overflow-auto pb-2' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
             <div className='flex flex-col h-full overflow-auto w-full gap-3'>
               <div>
@@ -208,6 +220,7 @@ const IssueBook = () => {
                     )
                   })
                 }
+                
 
 
               </div>
@@ -215,7 +228,7 @@ const IssueBook = () => {
 
             </div>
           </div>
-          <div className='w-full rounded-lg p-3' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
+          <div className='w-full rounded-lg p-3 h-full overflow-auto pb-2' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
             <div className='flex flex-col w-full gap-3'>
               <div>
 

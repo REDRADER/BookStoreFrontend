@@ -24,7 +24,7 @@ const Login = () => {
     const { openBackdrop, closeBackdrop, BackdropComponent } = useBackdrop();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState("password");
+    const [showPassword, setShowPassword] = useState(true);
 
     const formSubmit = async (values, { setSubmitting }) => {
         console.log("heelo")
@@ -73,63 +73,73 @@ const Login = () => {
     return (
         <>
             <BackdropComponent />
-            <div>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={formValidationSchema}
-                    onSubmit={formSubmit}
-                >
+            <div className='w-full h-screen flex justify-center items-center p-3 '>
+                <div className='w-full flex-col gap-5 flex items-center max-w-[400px] px-5 py-[50px] rounded-md' style={{boxShadow:"rgba(17, 12, 46, 0.15) 0px 48px 100px 0px"}}>
 
-                    {
-                        ({ isSubmitting, errors }) => {
+                    <h1 className='text-4xl font-bold'>login</h1>
 
-                            return (
-                                <Form className="">
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={formValidationSchema}
+                        onSubmit={formSubmit}
+                    >
 
-                                    <div className="">
-                                        <label htmlFor="email">
-                                            Name
-                                        </label>
-                                        <Field name="email" type="email" placeholder={`Enter your Email Id`} />
-                                        <ErrorMessage name='email' component="span" />
+                        {
+                            ({ isSubmitting, errors }) => {
+
+                                return (
+                                    <Form className=" flex flex-col gap-4 w-full">
+
+                                        <div className="flex flex-col gap-1 relative ">
+                                            <label htmlFor="email" className='text-[#505050] text-[15px] leading-[18px]'>
+                                                Name:
+                                            </label>
+                                            <Field name="email" type="email" placeholder={`Enter your Email Id`} className="w-full h-[40px] border border-[#d2d2d2] rounded-md px-2" />
+                                            <ErrorMessage name='email' component="span" className='absolute top-[101%] left-0  text-red-500 text-[11px]' />
 
 
-                                    </div>
-
-                                    <div className="">
-                                        <label htmlFor="password">
-                                            Password:
-                                        </label>
-                                        <Field name="password" placeholder="Enter your Password" type={showPassword ? 'text' : 'password'} />
-                                        <div className="">
-                                            {showPassword ? (
-                                                <VisibilityOff onClick={() => setShowPassword(false)} />
-                                            ) : (
-                                                <Visibility onClick={() => setShowPassword(true)} />
-                                            )}
                                         </div>
-                                        <ErrorMessage name='password' component="span" />
 
-                                    </div>
+                                        <div className="flex flex-col gap-1 relative ">
+                                            <label htmlFor="password" className='text-[#505050] text-[15px] leading-[18px]'>
+                                                Password:
+                                            </label>
+                                            <div className="w-full h-[40px] flex items-center border border-[#d2d2d2] rounded-md">
+                                                <Field name="password" placeholder="Enter your Password" className="w-full h-full px-2 rounded-md" type={!showPassword ? 'text' : 'password'} />
+                                               <span className='p-2'>
 
-                                    <div className="">
+                                                {showPassword ? (
+                                                    <VisibilityOff onClick={() => setShowPassword(false)} />
+                                                ) : (
+                                                    <Visibility onClick={() => setShowPassword(true)} />
+                                                )}
+                                                </span>
+                                            </div>
+                                            <ErrorMessage name='password' component="span" className='absolute top-[101%] left-0  text-red-500 text-[11px]' />
+
+                                        </div>
+
+                                        {/* <div className=" w-full text-right ">
                                         <Link to="/reset-password">Forgot Password?</Link>
-                                    </div>
+                                    </div> */}
 
 
-                                    <div className="">
-                                        <button type="submit" disabled={isSubmitting}>
+
+                                        <button type="submit" className='w-full h-[40px] bg-[--color-primary] rounded-md text-white' disabled={isSubmitting}>
                                             Submit
                                         </button>
-                                    </div>
 
-                                </Form>
-                            )
+
+                                    </Form>
+                                )
+                            }
                         }
-                    }
 
 
-                </Formik>
+                    </Formik>
+
+                </div>
+
             </div>
         </>
     )

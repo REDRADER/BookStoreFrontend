@@ -22,9 +22,9 @@ const data = [
         link: "issue-books",
     },
     {
-        title: "Return Books",
+        title: "Issued Books",
         icon: <AutoStoriesIcon className='w-[24px] h-[24px]' />,
-        link: "return-books",
+        link: "issued-books",
     },
     {
         title: "Users",

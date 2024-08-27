@@ -10,6 +10,7 @@ import IssueBook from 'pages/Admin/IssueBook';
 import ReturnBook from 'pages/Admin/ReturnBook';
 import Users from 'pages/Admin/Users';
 import BookDetails from 'pages/Admin/BookDetails';
+import IssuedBooks from 'pages/Admin/IssuedBooks';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                   <Route path='edit/:id' element={<AddEditBook />} />
                 </Route>
                 <Route path='issue-books' element={<IssueBook />} />
+                <Route path='issued-books' element={<IssuedBooks />} />
                 <Route path='return-books' element={<ReturnBook />} />
                 <Route path='users' element={<Users />} />
               </Route>
