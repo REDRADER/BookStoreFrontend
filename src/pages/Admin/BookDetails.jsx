@@ -34,7 +34,7 @@ const BookDetails = () => {
       <BackdropComponent />
       <PageContainer>
         <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap min-w-[600px]'>
-          <h1 className='text-4xl font-semibold'>
+          <h1 className='text-2xl md:text-4xl font-semibold'>
             Books
           </h1>
           <div className='w-[200px] lg:min-w-[350px] rounded-lg border flex items-center pl-2 pr-3 gap-1 '>

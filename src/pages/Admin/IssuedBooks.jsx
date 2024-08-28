@@ -71,7 +71,7 @@ const IssuedBooks = () => {
       <BackdropComponent />
       <PageContainer>
         <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap gap-3'>
-          <h1 className='text-4xl font-semibold order-1'>
+          <h1 className='text-2xl md:text-4xl font-semibold order-1'>
             Issued Books
           </h1>
           <div className='w-full md:w-[200px] lg:min-w-[350px] rounded-lg border flex items-center pl-2 pr-3 gap-1 order-3 md:order-2'>

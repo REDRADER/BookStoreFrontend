@@ -36,7 +36,11 @@ function App() {
                 <Route path='issue-books' element={<IssueBook />} />
                 <Route path='issued-books' element={<IssuedBooks />} />
                 <Route path='return-books' element={<ReturnBook />} />
-                <Route path='users' element={<Users />} />
+                <Route path='users' element={<Outlet />} >
+                <Route index element={<Users />} />
+                <Route path='add' element={<AddEditBook />} />
+                <Route path='edit/:id' element={<AddEditBook />} />
+                </Route>
               </Route>
          
 

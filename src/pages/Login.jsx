@@ -76,7 +76,7 @@ const Login = () => {
             <div className='w-full h-screen flex justify-center items-center p-3 '>
                 <div className='w-full flex-col gap-5 flex items-center max-w-[400px] px-5 py-[50px] rounded-md' style={{boxShadow:"rgba(17, 12, 46, 0.15) 0px 48px 100px 0px"}}>
 
-                    <h1 className='text-4xl font-bold'>login</h1>
+                    <h1 className='text-2xl md:text-4xl font-bold'>login</h1>
 
                     <Formik
                         initialValues={initialValues}

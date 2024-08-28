@@ -142,7 +142,7 @@ const IssueBook = () => {
       <BackdropComponent />
       <PageContainer>
         <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap  '>
-          <h1 className='text-4xl font-semibold'>
+          <h1 className='text-2xl md:text-4xl font-semibold'>
             Issue Book
           </h1>
 
@@ -184,7 +184,7 @@ const IssueBook = () => {
                 </form>
               </div>
 
-              <div className='flex w-full h-[500px] md:h-full overflow-y-auto flex-col gap-2 p-1'>
+              <div className='flex w-full h-auto md:h-full overflow-y-auto flex-col gap-2 p-1'>
                 {
                   allBooks.map((book) => {
                     const selected = book._id === bookData._id;
