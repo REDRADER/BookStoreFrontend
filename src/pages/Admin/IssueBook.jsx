@@ -21,8 +21,8 @@ const IssueBook = () => {
 
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('bookId');
-  const navigate=useNavigate();
- 
+  const navigate = useNavigate();
+
   const privateAxios = PrivateComponent();
   const [query, setQuery] = useState("")
   const [userQuery, setUserQuery] = useState("")
@@ -32,13 +32,13 @@ const IssueBook = () => {
   const [allUsers, setAllUsers] = useState([])
 
 
-  const handleFormData=(e)=>{
+  const handleFormData = (e) => {
 
-    const {value,name}=e.target;
-    setFormData(prev=>{
-      return{
+    const { value, name } = e.target;
+    setFormData(prev => {
+      return {
         ...prev,
-        [name]:value
+        [name]: value
       }
     })
 
@@ -115,24 +115,20 @@ const IssueBook = () => {
         status: "issued",
         remark: formData.remark
       }
-    
+
       const res = await privateAxios.post(`/admin/issueBook`, payload)
-     if(res.status===200)
-     {
-      alert("Book Issued Successfully")
-      navigate(-1)
-     }
+      if (res.status === 200) {
+        alert("Book Issued Successfully")
+        navigate(-1)
+      }
     } catch (error) {
-      if(error.response.status===401)
-      {
+      if (error.response.status === 401) {
         alert("Book is Already issued to User")
       }
-      else if(error.response.status===400)
-      {
+      else if (error.response.status === 400) {
         alert("No Available Books to Issue")
       }
-      else
-      {
+      else {
 
         alert("Error Issuing Book")
       }
@@ -145,37 +141,40 @@ const IssueBook = () => {
     <>
       <BackdropComponent />
       <PageContainer>
-        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap min-w-[600px]  '>
+        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap  '>
           <h1 className='text-4xl font-semibold'>
             Issue Book
           </h1>
 
           <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white'>Add Book</Link>
         </div>
+        <div className='flex flex-col h-full overflow-auto gap-3 p-2'>
+
+        
         <div className='w-full rounded-lg p-3 pb-2 flex flex-col gap-3' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-            
-         
-          <div className='w-full flex gap-1 flex-col '>
-            <label htmlFor=""> Issue Date</label>
-            <input type="date" required value={formData.issueDate} name='issueDate' min={new Date().toISOString().split("T")[0]}  onChange={handleFormData} className='h-[40px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
-           
-          </div>
-          <div className='w-full flex gap-1 flex-col '>
-            <label htmlFor=""> Expected Return Date</label> 
-            <input type="date" required value={formData.expectedReturnDate} min={formData.issueDate} name='expectedReturnDate' onChange={handleFormData} className='h-[40px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
-           
-          </div>
+
+
+            <div className='w-full flex gap-1 flex-col '>
+              <label htmlFor=""> Issue Date</label>
+              <input type="date" required value={formData.issueDate} name='issueDate' min={new Date().toISOString().split("T")[0]} onChange={handleFormData} className='h-[40px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
+
+            </div>
+            <div className='w-full flex gap-1 flex-col '>
+              <label htmlFor=""> Expected Return Date</label>
+              <input type="date" required value={formData.expectedReturnDate} min={formData.issueDate} name='expectedReturnDate' onChange={handleFormData} className='h-[40px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
+
+            </div>
           </div>
           <div className='w-full flex gap-1 flex-col '>
             <label htmlFor="">Remark</label>
-            <textarea  value={formData.remark} onChange={handleFormData} name='remark' className='h-[100px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
-           
+            <textarea value={formData.remark} onChange={handleFormData} name='remark' className='h-[100px] w-full  rounded-md border px-3 border-[#d2d2d2] focus:border-[#1b1b1b] outline-none' />
+
           </div>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[calc(100%-400px)]'>
-          <div className='w-full rounded-lg p-3 h-full overflow-auto pb-2' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
-            <div className='flex flex-col h-full overflow-auto w-full gap-3'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 '>
+          <div className='w-full rounded-lg p-3 h-full md:overflow-auto pb-2' style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" }}>
+            <div className='flex flex-col md:h-full overflow-auto w-full gap-3'>
               <div>
 
                 <h2 className='text-2xl font-medium'>Search Book</h2>
@@ -185,7 +184,7 @@ const IssueBook = () => {
                 </form>
               </div>
 
-              <div className='flex w-full h-full overflow-y-auto flex-col gap-2 p-1'>
+              <div className='flex w-full h-[500px] md:h-full overflow-y-auto flex-col gap-2 p-1'>
                 {
                   allBooks.map((book) => {
                     const selected = book._id === bookData._id;
@@ -220,7 +219,7 @@ const IssueBook = () => {
                     )
                   })
                 }
-                
+
 
 
               </div>
@@ -283,6 +282,7 @@ const IssueBook = () => {
         </div>
         <div className='w-full p-3 '>
           <button className='w-full bg-[--color-primary] text-white text-[16px] px-3 h-[40px] rounded-md' onClick={issueBookSubmit}>Issue Book</button>
+        </div>
         </div>
       </PageContainer>
     </>

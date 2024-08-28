@@ -177,7 +177,7 @@ const AddEditBook = () => {
                   <div className='grid grid-cols-1 md:grid-cols-[3fr_1fr] h-full'> 
 
                  
-                  <div className='p-2 w-full h-full flex flex-col gap-5'>
+                  <div className='p-2 w-full h-full flex flex-col gap-5 order-2 md:order-1'>
                     <div className='relative flex flex-col gap-2 '>
                       <label htmlFor="name">Name <span className='text-red-600'>*</span></label>
                       <Field name="name" type="text" placeholder="Enter Book Name" className="w-full h-[40px] px-3 border rounded-md" />
@@ -281,7 +281,7 @@ const AddEditBook = () => {
 
 
                   </div>
-                  <div className='p-2 w-full '>
+                  <div className='p-2 w-full  order-1 md:order-1'>
                     <FileUploader onChange={setPhoto} value={photo} />
                   </div>
                   </div>

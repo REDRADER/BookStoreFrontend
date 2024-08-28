@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Backdrop } from '@mui/material';
 import useAuth from 'hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useDispatch } from 'react-redux';
+import { setLogout } from 'state/AppState';
 const Topbar = ({ open, toggle }) => {
   const [dropOpen, setDropOpen] = useState(false);
   const { auth } = useAuth();
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   const [url, setUrl] = useState([]);
   const toggleDropDown = () => {
@@ -14,6 +18,10 @@ const Topbar = ({ open, toggle }) => {
   }
 
 
+  const handleLogout=()=>{
+    dispatch(setLogout());
+    navigate("/login",{replace:true})
+  }
 
 
 
@@ -42,9 +50,9 @@ const Topbar = ({ open, toggle }) => {
                 <Link to={"profile"} className='w-full py-1 px-2 rounded-[5px]'>
                   Profile
                 </Link>
-                <Link to={"login"} className='w-full py-1 px-2 rounded-[5px] bg-[#e63946] text-white'>
+                <p onClick={handleLogout} className='w-full py-1 px-2 rounded-[5px] bg-[#e63946] text-white'>
                   Logout
-                </Link>
+                </p>
               </div>
             </>
           }

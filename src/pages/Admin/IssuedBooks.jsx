@@ -70,16 +70,16 @@ const IssuedBooks = () => {
     <>
       <BackdropComponent />
       <PageContainer>
-        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap min-w-[600px]'>
-          <h1 className='text-4xl font-semibold'>
+        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap gap-3'>
+          <h1 className='text-4xl font-semibold order-1'>
             Issued Books
           </h1>
-          <div className='w-[200px] lg:min-w-[350px] rounded-lg border flex items-center pl-2 pr-3 gap-1 '>
+          <div className='w-full md:w-[200px] lg:min-w-[350px] rounded-lg border flex items-center pl-2 pr-3 gap-1 order-3 md:order-2'>
             <SearchIcon className='w-[15px] h-[20px]' />
             <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className='w-full h-[35px] rounded-lg  outline-none border-none bg-none' />
 
           </div>
-          <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white'>Add Book</Link>
+          <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white order-2 md:order-3'>Add Book</Link>
         </div>
         <div className='w-full flex justify-start items-start overflow-auto rounded-lg border-[1px]'>
           <table className='w-full border-collapse min-w-[1000px] rounded-t-lg'>
