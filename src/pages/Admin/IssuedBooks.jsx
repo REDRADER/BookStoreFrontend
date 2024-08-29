@@ -36,11 +36,13 @@ const IssuedBooks = () => {
   const [returnModal,setReturnModal]=useState(false);
   const handleReturnModal=(data)=>{
     setReturnModal(prev=>!prev);
-    if(data.bookId)
+   
+    if(data?.historyId)
     {
       setSelectedBook(data);
     }
   }
+
 
   const handleReturn = async (data) => {
     openBackdrop();
@@ -61,6 +63,7 @@ const IssuedBooks = () => {
       handleReturnModal();
       getData();
     } catch (error) {
+      console.log(error)
       alert("Error Returning Book")
     }
     closeBackdrop();
@@ -79,7 +82,7 @@ const IssuedBooks = () => {
             <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className='w-full h-[35px] rounded-lg  outline-none border-none bg-none' />
 
           </div>
-          <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white order-2 md:order-3'>Add Book</Link>
+          <Link to={"/admin/issue-books"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white order-2 md:order-3'>New Issue </Link>
         </div>
         <div className='w-full flex justify-start items-start overflow-auto rounded-lg border-[1px]'>
           <table className='w-full border-collapse min-w-[1000px] rounded-t-lg'>
@@ -113,7 +116,8 @@ const IssuedBooks = () => {
             </thead>
             <tbody>
               {
-                data.filter((item) => (item.bookDetails.name.toLowerCase().includes(search) || item.bookDetails.author.name.toLowerCase().includes(search) || item.bookDetails.category.toLowerCase().includes(search))).map((book, index) => {
+                data.filter((item) => (item.bookDetails.name.toLowerCase().includes(search) || item.bookDetails.author.name.toLowerCase().includes(search) || item.bookDetails.category.toLowerCase().includes(search)))
+                .map((book, index) => {
                   return (
                     <tr key={index} className={`border-b`}>
                       <td className='px-3 py-2 text-left w-[70px] text-[15px] '>

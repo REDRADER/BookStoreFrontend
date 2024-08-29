@@ -11,6 +11,8 @@ import ReturnBook from 'pages/Admin/ReturnBook';
 import Users from 'pages/Admin/Users';
 import BookDetails from 'pages/Admin/BookDetails';
 import IssuedBooks from 'pages/Admin/IssuedBooks';
+import AddEditUser from 'pages/Admin/AddEditUser';
+import DashBoard from 'pages/Admin/DashBoard';
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
           <Route element={<RequireRole allowedRoles={["ADMIN"]} />}>
             <Route path='/' element={<Navigate to="/admin" replace={true} />} />
               <Route path='admin' element={<Layout />}>
-                <Route path='dashboard' element={<Outlet />} />
+                <Route path='dashboard' element={<DashBoard />} />
                 <Route path='profile' element={<Outlet />} />
                 <Route path='books' element={<Outlet />} >
                   <Route index element={<Books />} />
@@ -38,8 +40,8 @@ function App() {
                 <Route path='return-books' element={<ReturnBook />} />
                 <Route path='users' element={<Outlet />} >
                 <Route index element={<Users />} />
-                <Route path='add' element={<AddEditBook />} />
-                <Route path='edit/:id' element={<AddEditBook />} />
+                <Route path='add' element={<AddEditUser />} />
+                <Route path='edit/:id' element={<AddEditUser />} />
                 </Route>
               </Route>
          

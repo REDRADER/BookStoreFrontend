@@ -146,7 +146,7 @@ const IssueBook = () => {
             Issue Book
           </h1>
 
-          <Link to={"add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white'>Add Book</Link>
+          <Link to={"/admin/books/add"} className='bg-[--color-primary] py-2 px-3 rounded-md font-medium text-white'>Add Book</Link>
         </div>
         <div className='flex flex-col h-full overflow-auto gap-3 p-2'>
 

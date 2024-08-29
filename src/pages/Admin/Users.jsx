@@ -8,6 +8,7 @@ import { PrivateComponent } from 'api/axios';
 import EditIcon from '@mui/icons-material/Edit';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import IssuedBooksModal from 'components/IssuedBooksModal';
 const Users = () => {
   const [search, setSearch] = useState("");
 
@@ -32,9 +33,36 @@ const Users = () => {
     getData()
   }, [])
 
+  const [issuedBooks, setIssuedBooks] = useState([])
+  const [issuedBookModal, setIssuedBookModal] = useState(false);
+  const handleIssuedBookModal = (data) => {
+    setIssuedBookModal(prev => !prev);
+    if (data?.email) {
+
+      getIssuedBook(data);
+    }
+  }
+
+  const getIssuedBook = async (data) => {
+    openBackdrop();
+    try {
+      const res = await privateAxios.get(`/admin/user-issued-books/${data._id}`)
+      setIssuedBooks(res.data)
+
+      console.log(res.data);
+    } catch (error) {
+      alert("error getting Book data")
+    }
+
+    closeBackdrop();
+  }
+
+
   return (
-    <PageContainer>
-     <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap gap-3'>
+    <>
+      <BackdropComponent />
+      <PageContainer>
+        <div className='flex items-center justify-between w-full border-b-2 py-3 px-3 flex-wrap gap-3'>
           <h1 className='text-2xl md:text-4xl font-semibold order-1'>
             Users
           </h1>
@@ -50,7 +78,7 @@ const Users = () => {
             <thead className='rounded-t-lg'>
               <tr className='bg-[#f9fafb] border-b-[1px] border-b-[#d2d2d2] text-[14px] font-semibold rounded-t-lg '>
                 <th className='px-3 py-2 text-left w-[70px] text-[#313131]'>
-                 Sr No.
+                  Sr No.
                 </th>
                 <th className='px-3 py-2 text-left text-[#313131] text-[14px] font-semibold'>
                   Name
@@ -71,46 +99,52 @@ const Users = () => {
             </thead>
             <tbody>
               {
-                data.filter((item)=>(item.name.toLowerCase().includes(search) || item.email.toLowerCase().includes(search) || item.phone.toLowerCase().includes(search) )).map((user,index)=>{
-                  return(
+                data.filter((item) => (item.name.toLowerCase().includes(search) || item.email.toLowerCase().includes(search) || item.phone.toLowerCase().includes(search))).map((user, index) => {
+                  return (
                     <tr key={index} className={`border-b`}>
-                        <td className='px-3 py-2 text-left w-[70px] text-[15px] '>
-                          {index+1}
-                        </td>
-                  
-                    <td className='px-3 py-2 text-left '>
-                      <div className='flex w-full h-full flex-col'>
-                      <h3 className='text-[15px] leading-[18px]'>
+                      <td className='px-3 py-2 text-left w-[70px] text-[15px] '>
+                        {index + 1}
+                      </td>
 
-                      {user.name}
-                      </h3>
-                     
-                      </div>
-                    </td>
-                    <td className='px-3 py-2 text-left text-[15px]'>
-                      {user.email}
-                    </td>
-                    <td className='px-3 py-2 text-left text-[15px]'>
-                      {user.phone}
-                    </td>
-                    <td className='px-3 py-2 text-left text-[15px]'>
-                      {user?.books?.length}
-                    </td>
-                    <td className='px-3 py-2 text-left w-[150px] '>
-                      <div className='flex gap-2'>
-                        <Link to={`edit/${user._id}`} className='w-[28px] h-[28px] flex justify-center items-center'><EditIcon className='h-full w-full' style={{width:"100%",height:"100%"}} /></Link>
-                        {/* <Link to={`${user._id}`} className='w-[28px] h-[28px] flex justify-center items-center'><FullscreenIcon className='h-full w-full' style={{width:"100%",height:"100%"}} /></Link>
+                      <td className='px-3 py-2 text-left '>
+                        <div className='flex w-full h-full flex-col'>
+                          <h3 className='text-[15px] leading-[18px]'>
+
+                            {user.name}
+                          </h3>
+
+                        </div>
+                      </td>
+                      <td className='px-3 py-2 text-left text-[15px]'>
+                        {user.email}
+                      </td>
+                      <td className='px-3 py-2 text-left text-[15px]'>
+                        {user.phone}
+                      </td>
+                      <td className='px-3 py-2 text-left text-[15px]'>
+                        <div className='text-[15px] flex gap-2'>
+
+                          {user?.books?.length} {user?.books?.length > 0 && <p className='underline text-[var(--color-primary)] cursor-pointer' onClick={() => handleIssuedBookModal(user)}>view</p>}
+                        </div>
+                      </td>
+                      <td className='px-3 py-2 text-left w-[150px] '>
+                        <div className='flex gap-2'>
+                          <Link to={`edit/${user._id}`} className='w-[28px] h-[28px] flex justify-center items-center'><EditIcon className='h-full w-full' style={{ width: "100%", height: "100%" }} /></Link>
+                          {/* <Link to={`${user._id}`} className='w-[28px] h-[28px] flex justify-center items-center'><FullscreenIcon className='h-full w-full' style={{width:"100%",height:"100%"}} /></Link>
                         <Link to={`/admin/issue-books?bookId=${book._id}`} className='w-[28px] h-[28px] flex justify-center items-center'><BeenhereIcon className='h-full w-full' style={{width:"100%",height:"100%"}} /></Link> */}
-                      </div>
-                    </td>
-                  </tr>
+                        </div>
+                      </td>
+                    </tr>
                   )
                 })
               }
             </tbody>
           </table>
         </div>
-  </PageContainer>
+      </PageContainer>
+
+      <IssuedBooksModal open={issuedBookModal} onClose={handleIssuedBookModal} data={issuedBooks}/>
+    </>
   )
 }
 
